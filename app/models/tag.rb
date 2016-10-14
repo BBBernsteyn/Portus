@@ -9,12 +9,13 @@
 #  updated_at    :datetime         not null
 #  user_id       :integer
 #  digest        :string(255)
-#  image_id      :string(255)      default("")
+#  image_id      :integer
 #  marked        :boolean          default("0")
 #  username      :string(255)
 #
 # Indexes
 #
+#  index_tags_on_image_id                (image_id)
 #  index_tags_on_name_and_repository_id  (name,repository_id) UNIQUE
 #  index_tags_on_repository_id           (repository_id)
 #  index_tags_on_user_id                 (user_id)
@@ -26,6 +27,7 @@
 class Tag < ActiveRecord::Base
   belongs_to :repository
   belongs_to :author, class_name: "User", foreign_key: "user_id"
+  belongs_to :image
 
   # We don't validate the tag, because we will fetch that from the registry,
   # and that's guaranteed to have a good format.

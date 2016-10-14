@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927141850) do
+ActiveRecord::Schema.define(version: 20161014203548) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 20160927141850) do
   end
 
   add_index "crono_jobs", ["job_id"], name: "index_crono_jobs_on_job_id", unique: true, using: :btree
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "repository_id",   limit: 4
+    t.text     "dockerfile",      limit: 65535
+    t.string   "docker_image_id", limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "images", ["repository_id"], name: "index_images_on_repository_id", using: :btree
 
   create_table "namespaces", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -126,11 +136,12 @@ ActiveRecord::Schema.define(version: 20160927141850) do
     t.datetime "updated_at",                                   null: false
     t.integer  "user_id",       limit: 4
     t.string   "digest",        limit: 255
-    t.string   "image_id",      limit: 255, default: ""
+    t.integer  "image_id",      limit: 4
     t.boolean  "marked",                    default: false
     t.string   "username",      limit: 255
   end
 
+  add_index "tags", ["image_id"], name: "index_tags_on_image_id", using: :btree
   add_index "tags", ["name", "repository_id"], name: "index_tags_on_name_and_repository_id", unique: true, using: :btree
   add_index "tags", ["repository_id"], name: "index_tags_on_repository_id", using: :btree
   add_index "tags", ["user_id"], name: "index_tags_on_user_id", using: :btree
@@ -226,6 +237,7 @@ ActiveRecord::Schema.define(version: 20160927141850) do
   add_index "webhooks", ["namespace_id"], name: "index_webhooks_on_namespace_id", using: :btree
 
   add_foreign_key "comments", "repositories"
+  add_foreign_key "images", "repositories"
   add_foreign_key "stars", "repositories"
   add_foreign_key "stars", "users"
   add_foreign_key "users", "namespaces"

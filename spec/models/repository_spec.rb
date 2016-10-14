@@ -27,6 +27,7 @@ describe Repository do
   it { should belong_to(:namespace) }
   it { should have_many(:tags) }
   it { should have_many(:stars) }
+  it { should have_many(:images) }
 
   describe "starrable behaviour" do
     let(:user) { create(:user) }

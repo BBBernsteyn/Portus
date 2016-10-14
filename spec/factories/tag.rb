@@ -4,5 +4,6 @@ FactoryGirl.define do
       "tag#{n}"
     end
     repository
+    image
   end
 end

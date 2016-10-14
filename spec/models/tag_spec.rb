@@ -9,12 +9,13 @@
 #  updated_at    :datetime         not null
 #  user_id       :integer
 #  digest        :string(255)
-#  image_id      :string(255)      default("")
+#  image_id      :integer
 #  marked        :boolean          default("0")
 #  username      :string(255)
 #
 # Indexes
 #
+#  index_tags_on_image_id                (image_id)
 #  index_tags_on_name_and_repository_id  (name,repository_id) UNIQUE
 #  index_tags_on_repository_id           (repository_id)
 #  index_tags_on_user_id                 (user_id)
@@ -36,6 +37,7 @@ describe Tag do
   let!(:repository) { create(:repository, namespace: registry.global_namespace, name: "repo") }
 
   it { should belong_to(:repository) }
+  it { should belong_to(:image) }
   it { should belong_to(:author) }
 
   describe "#delete_by_digest!" do
