@@ -36,5 +36,11 @@ feature "Images support" do
         expect(page).to have_content(tag.name)
       end
     end
+
+    scenario "Show Dockerfile", js: true do
+      within "#dockerfile" do
+        expect(page).to have_content(image.dockerfile)
+      end
+    end
   end
 end

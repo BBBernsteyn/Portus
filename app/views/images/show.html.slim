@@ -12,3 +12,12 @@
           - @image.tags.each do |t|
             .label.label-success
               = t.name
+
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-xs-6
+        h5
+          | Dockerfile
+  .panel-body#dockerfile
+    = @image.dockerfile
