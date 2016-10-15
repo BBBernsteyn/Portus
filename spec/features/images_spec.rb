@@ -24,10 +24,16 @@ feature "Images support" do
     end
 
     scenario "Show breadcrumbs", js: true do
-      within ".panel-heading" do
+      within "#breadcrumbs" do
         expect(page).to have_content(namespace.clean_name)
         expect(page).to have_content(repository.name)
         expect(page).to have_content(image.docker_image_id)
+      end
+    end
+
+    scenario "Show tags", js: true do
+      within "#tags" do
+        expect(page).to have_content(tag.name)
       end
     end
   end

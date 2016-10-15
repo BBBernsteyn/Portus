@@ -2,10 +2,13 @@
   .panel-heading
     .row
       .col-xs-6
-        h5
+        h5#breadcrumbs
           = link_to @repository.namespace.clean_name, @repository.namespace
           | /
           = link_to @repository.name, @repository
           | /
           = @image.docker_image_id
-
+        #tags
+          - @image.tags.each do |t|
+            .label.label-success
+              = t.name
