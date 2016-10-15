@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: [:destroy]
+  resources :images, only: [:show]
 
   resources :application_tokens, only: [:create, :destroy]
 

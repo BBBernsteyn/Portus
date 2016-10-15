@@ -109,11 +109,12 @@
                       = t.name
                   td= tag.first.owner
                   td
-                    - if tag.first.image_id.blank?
+                    - unless tag.first.image || tag.first.image.docker_image_id.blank?
                       = "-"
                     - else
-                      span[title="sha256:#{tag.first.image_id}"]
-                        = tag.first.image_id[0, 12]
+                      span[title="sha256:#{tag.first.image.docker_image_id}"]
+                        = link_to tag.first.image.docker_image_id[0, 12],
+                          image_path(tag.first.image.id)
                   td= tag.first.updated_at
             - else
               tr
@@ -123,11 +124,12 @@
                       = t.name
                 td= tag.first.owner
                 td
-                  - if tag.first.image_id.blank?
+                  - unless tag.first.image || tag.first.image.docker_image_id.blank?
                     = "-"
                   - else
-                    span[title="sha256:#{tag.first.image_id}"]
-                      = tag.first.image_id[0, 12]
+                    span[title="sha256:#{tag.first.image.docker_image_id}"]
+                      = link_to tag.first.image.docker_image_id[0, 12],
+                        image_path(tag.first.image.id)
                 td= tag.first.updated_at
 
                 - if can_destroy?(@repository)
