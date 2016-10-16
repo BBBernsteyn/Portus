@@ -1,0 +1,17 @@
+li
+  .activitie-container
+    .activity-type.change-namespace-visibility
+      i.fa.fa-unlock
+    .user-image
+      = user_image_tag(activity.owner)
+    .description
+      h6
+        strong
+           = "#{activity_owner(activity)} edited the dockerfile of "
+        -#= link_to activity.trackable.docker_id, activity.trackable
+        = render_namespace(activity)
+        | /
+        = link_to activity.trackable.docker_id, activity.trackable
+      small
+        i.fa.fa-clock-o
+        -# = activity_time_tag activity.created_at

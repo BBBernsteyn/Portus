@@ -1,0 +1,5 @@
+<% if @image.errors.empty? %>
+<% else %>
+  $('#float-alert p').html("<%= escape_javascript(@image.errors.full_messages.join('<br/>')) %>");
+  $('#float-alert').fadeIn(setTimeOutAlertDelay());
+<% end %>

@@ -144,7 +144,7 @@ class Repository < ActiveRecord::Base
       # Update digest if the given tag already exists.
       id, digest = Repository.id_and_digest_from_event(event, repository.full_name)
       tag = repository.tags.find_by(name: tag)
-      # TODO Automatical discovery of dockerfile
+      # TODO: Automatical discovery of dockerfile
       image = repository.images.create(docker_image_id: id)
       tag.update!(image: image, digest: digest, updated_at: Time.current)
       repository.create_activity(:push, owner: actor, recipient: tag)
@@ -153,7 +153,7 @@ class Repository < ActiveRecord::Base
 
     # And store the tag and its activity.
     id, digest = Repository.id_and_digest_from_event(event, repository.full_name)
-    # TODO Automatical discovery of dockerfile
+    # TODO: Automatical discovery of dockerfile
     image = repository.images.create(docker_image_id: id)
     tag = repository.tags.create(name: tag, author: actor, digest: digest, image: image)
     repository.create_activity(:push, owner: actor, recipient: tag)

@@ -16,7 +16,7 @@
 
 FactoryGirl.define do
   factory :image do
-    dockerfile "FROM scratch\nADD rootfs.tar.gz /"
+    dockerfile "FROM scratch\r\nADD rootfs.tar.gz /"
     docker_image_id  "7d7ae134f8eb"
     repository
   end

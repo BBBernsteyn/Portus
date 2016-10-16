@@ -22,6 +22,7 @@ gem "redcarpet"
 gem "font-awesome-rails"
 gem "bootstrap-typeahead-rails"
 gem "rails_stdout_logging", "~> 0.0.5", group: [:development, :staging, :production]
+gem "ace-rails-ap"
 
 # Pinning these specific versions because that's what we have on OBS.
 gem "ethon", "~> 0.9.0"

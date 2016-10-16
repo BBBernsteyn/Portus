@@ -5,4 +5,7 @@
 #= require bootstrap-sprockets
 #= require lifeitup_layout
 #= require bootstrap-typeahead-rails
+#= require ace-rails-ap
+#= require ace/theme-solarized_dark
+#= require ace/mode-dockerfile
 #= require_tree .

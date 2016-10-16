@@ -12,12 +12,35 @@
           - @image.tags.each do |t|
             .label.label-success
               = t.name
-
 .panel.panel-default
   .panel-heading
     .row
       .col-xs-6
         h5
           | Dockerfile
+      .col-sm-6.text-right
+        button.btn.btn-link.btn-xs.btn-edit-role[
+          value="#{@image.id}" id="edit_dockerfile" class="button_dockerfile"]
+          i.fa.fa-pencil
+          | Edit Dockerfile
   .panel-body#dockerfile
-    = @image.dockerfile
+    #editor
+      = @image.dockerfile
+    javascript:
+      $(document).on('page:change', function() {
+        var editor = ace.edit('editor');
+        editor.setReadOnly(true);
+        editor.setTheme("ace/theme/solarized_dark");
+        editor.getSession().setMode("ace/mode/dockerfile");
+        editor.$blockScrolling = Infinity
+      });
+
+    .collapse id="change_dockerfile_#{@image.id}"
+      = form_for @image, remote: true, html: {role: 'form', id: 'edit-image-form'} do |f|
+        = f.hidden_field :dockerfile
+        .form-group
+          br
+            = button_tag(type: 'submit', class: 'btn btn-primary pull-right') do
+              i.fa.fa-check
+              | Save
+

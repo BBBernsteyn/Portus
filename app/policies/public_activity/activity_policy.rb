@@ -48,9 +48,17 @@ class PublicActivity::ActivityPolicy
                                             "AND activities.owner_id = ?",
                                             "ApplicationToken", user.id)
 
+      # Show activities related to images to the team
+      image_activities = @scope
+                        .joins("INNER JOIN teams ON activities.trackable_id = teams.id " \
+               "INNER JOIN team_users ON teams.id = team_users.team_id")
+                        .where("activities.trackable_type = ? AND team_users.user_id = ?",
+               "Image", user.id)
+
       team_activities
         .union_all(namespace_activities)
         .union_all(repository_activities)
+        .union_all(image_activities)
         .union_all(application_token_activities)
         .union_all(webhook_activities)
         .distinct

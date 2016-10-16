@@ -15,6 +15,8 @@
 #
 
 class Image < ActiveRecord::Base
+  include PublicActivity::Common
+
   belongs_to :repository
   has_many :tags
 end
