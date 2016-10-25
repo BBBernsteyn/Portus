@@ -130,7 +130,7 @@ describe Repository do
         allow(Repository).to receive(:id_and_digest_from_event).and_return(["id", "bar"])
         Repository.add_repo(event, registry.global_namespace, repository_name, tag_name)
         tag = Repository.find_by(name: repository_name).tags.first
-        expect(tag.image_id).to eq("id")
+        expect(tag.image.docker_image_id).to eq("id")
         expect(tag.digest).to eq("bar")
         expect(tag.updated_at).to_not eq(ua)
       end
